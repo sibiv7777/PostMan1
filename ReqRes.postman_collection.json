@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "80a4af72-43da-4325-8404-27ede455a88d",
+		"name": "ReqRes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18511638"
+	},
+	"item": [
+		{
+			"name": "GetRequest",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\",function(){\r",
+							"    pm.expect(pm.response.code).to.be.eql(200)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response time is lessThan 4000 ms\",function(){console.log(\"Actual response time is :\" +pm.response.responseTime);\r",
+							"    pm.expect(pm.response.responseTime).to.be.lessThan(4000)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Content-type is application/json\",function(){\r",
+							"    pm.expect(pm.response.headers.get(\"Content-type\")).to.be.eql(\"application/json; charset=utf-8\")\r",
+							"})\r",
+							"\r",
+							"var body=pm.response.json();\r",
+							"pm.test(\"first name is same\",function(){\r",
+							"    pm.expect(body.data[0].first_name).to.be.eql(\"Michael\")\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?page=2",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
